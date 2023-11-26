@@ -1,0 +1,58 @@
+@model Dish
+@{
+    if (Model != null)
+    {
+        ViewData["Title"] = $"Dish {@Model.Name} - Page";
+    }
+    else
+    {
+        ViewData["Title"] = $"Dish Not Found";
+    }
+
+}
+
+
+@{
+    if (Model != null)
+    {
+        <h1 class="text-center mt-4 mb-5">@Model.Name </h1>
+
+        <div class="text-center row d-flex bd-highlight mb-3">
+            <div class="border-end border-dark col fs-4">
+                <a class="float-end me-2 nav-link text-primary underline" asp-action="Index">Home</a>
+            </div>
+            <div class="border-right col">
+                <form asp-action="AddDish" asp-controller="Home" method="get">
+                    @* <a class="float-start ms-2 nav-link" asp-action="Index">Add a Dish</a> *@
+                    <input type="submit" class="float-start ms-2 nav-link border-0 bg-transparent text-primary fs-4 underline"
+                        value="Add a Dish">
+                </form>
+            </div>
+        </div>
+
+        <div class="container row">
+            <div class="col mb-3">
+                <p class="fs-5 mt-2 fw-bold"><u>@Model?.Name by @Model?.Chef</u></p>
+                <p class=" fw-bolder">@Model?.Description</p>
+                <p class="fw-bolder">Calories: @Model?.Calories</p>
+                <p class="fw-bolder">Tastiness: @Model?.Tastiness</p>
+            </div>
+            <div class="row d-flex bd-highlight text-center">
+                <div class="col">
+                    <form asp-action="DeleteDish" asp-route-id="@Model?.DishId" asp-controller="Home" method="post">
+                        <input type="submit" value="Delete" class="btn btn-danger fw-bolder border-dark border-2 shawdow">
+                    </form>
+                </div>
+                <div class="col">
+                    <form asp-action="EditDish" asp-route-id="@Model?.DishId" asp-controller="Home" method="get">
+                        <input type="submit" value="Edit" class="btn btn-primary fw-bolder border-dark border-2 shawdow">
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h1 class="text-center mt-4">Dish Not Found</h1>
+    }
+}

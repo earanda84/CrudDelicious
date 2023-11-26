@@ -1,0 +1,86 @@
+@model Dish
+@{
+    if (Model != null)
+    {
+        ViewData["Title"] = $"Dish {@Model.Name} - Page";
+    }
+    else
+    {
+        ViewData["Title"] = $"This Dish was Not Found";
+    }
+}
+
+
+<h1 class="text-center">Edit @Model?.Name</h1>
+
+<div class="text-center row d-flex bd-highlight my-4">
+    <div class="border-end border-dark col fs-4">
+        <a class="float-end me-3 nav-link text-dark underline" asp-action="Index">Home</a>
+    </div>
+    <div class="border-right col">
+        <form asp-action="AddDish" asp-controller="Home" method="get">
+            @* <a class="float-start ms-2 nav-link" asp-action="Index">Add a Dish</a> *@
+            <input type="submit" class="float-start ms-2 nav-link border-0 bg-transparent text-dark fs-4 underline"
+                value="Add a Dish">
+        </form>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <form asp-action="UpdateDish" asp-route-id="@Model?.DishId" asp-controller="Home" method="post">
+        <div class="row mt-5">
+            <!-- Primera columna con 3 inputs -->
+            <div class="col-md-4">
+                <div class="d-flex flex-column">
+                    <div class="mb-4">
+                        <label asp-for="Chef" class="fw-bold mb-2"></label>
+                        <input asp-for="Chef" class="form-control border-2 border-dark rounded-0">
+                        <span asp-validation-for="Chef" class="text-danger"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="Name" class="fw-bold mb-2"></label>
+                        <input asp-for="Name" class="form-control border-2 border-dark rounded-0">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="Calories" class="fw-bold mb-2"></label>
+                        <input asp-for="Calories" class="form-control border-2 border-dark rounded-0">
+                        <span asp-validation-for="Calories" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segunda columna con un select -->
+            <div class="col-md-4">
+                <div class="d-flex flex-column">
+                    <div class="mb-3">
+                        <label asp-for="Tastiness" class="fw-bold mb-2"></label>
+                        <select asp-for="Tastiness" class="form-select border-2 border-dark rounded-0">
+                            <!-- opciones del select -->
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <span asp-validation-for="Tastiness" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tercera columna con un text-area y un botón -->
+            <div class="col-md-4">
+                <div class="d-flex flex-column">
+                    <div class="mb-3">
+                        <label asp-for="Description" class="fw-bold mb-2">Description</label>
+                        <textarea asp-for="Description" class="form-control border-2 border-dark rounded-0" rows="7"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 text-end">
+                        <input type="submit" class="btn btn-primary shadow bg-transparent border border-2 border-dark rounded-0 fw-bold text-dark" value="Edit Dish"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

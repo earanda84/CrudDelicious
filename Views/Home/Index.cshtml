@@ -1,0 +1,41 @@
+﻿@model List<Dish>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<h1 class="text-center">Welcome to CRUDelicious</h1>
+
+<div class="text-center row d-flex bd-highlight my-4">
+    <div class="border-end border-dark col fs-4">
+        <a class="float-end me-3 nav-link text-dark underline" asp-action="Index">Home</a>
+    </div>
+    <div class="border-right col">
+        <form asp-action="AddDish" asp-controller="Home" method="get">
+            @* <a class="float-start ms-2 nav-link" asp-action="Index">Add a Dish</a> *@
+            <input type="submit" class="float-start ms-2 nav-link border-0 bg-transparent text-dark fs-4 underline"
+                value="Add a Dish">
+        </form>
+    </div>
+</div>
+
+<div class="flex w-50 mt-5">
+
+    <table class="table responsive ">
+        <thead>
+            <tr>
+                <th scope="col" class="fs-2">Check out some recent dishes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var dish in Model)
+                {
+                    <tr>
+                        <th class="fw-normal fs-4"><a href="/dishes/@dish.DishId">@dish.Name</a> By @dish.Chef</th>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
